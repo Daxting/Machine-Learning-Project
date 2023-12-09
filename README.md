@@ -1,2 +1,3 @@
 # ML-1121
-## the repo for machine learning class
+## the projects for machine learning class
+## written in traditional chinese
