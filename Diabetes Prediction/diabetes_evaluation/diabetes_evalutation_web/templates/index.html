@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if title %}
+        <title>{{ title }}</title>
+    {% else %}
+        <title>Flask App</title>
+    {% endif %}
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="..." crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.19.0/font/bootstrap-icons.css">
+    
+    <style>
+      .navbar-brand{
+          color: rgb(0, 42, 212) !important;
+          font-size: 35px !important;
+          font-weight: bold;
+      }
+      .custom-bg-orange {
+          background-color: rgb(255, 145, 0); /* 黄橘色的十六进制表示 */
+      }
+      body {
+          padding-top: 80px; /* 或者根据导航栏的实际高度进行调整 */
+          background-color: #f8f9fa !important;
+      }
+      .custom-container {
+        background-color: #f8f9fa; /* 纯白色的十六进制表示 */
+        max-width: 800px; /* 调整最大宽度，根据需要进行调整 */
+        margin: 0 auto; /* 让内容居中 */
+      }
+      .custom-content {
+        background-color: #f8f9fa  !important; /* 纯白色的十六进制表示 */
+        padding: 15px; /* 可选：添加一些内边距以增加内容与边缘的距离 */
+      }
+      #navbar-example2 {
+        background-color: #baf6ff51 !important; 
+      }
+      h2 {
+        color: #007bff; /* H2 文本颜色，可以根据整体设计调整 */
+        border-bottom: 2px solid #007bff; /* H2 下边框特效，可以根据整体设计调整 */
+      }
+      .custom-h2-yellow {
+        color: rgb(255, 145, 0); /* 设置特定 h2 元素的文本颜色为黄色 */
+        border-bottom: 2px solid rgb(255, 145, 0);
+      }
+      .center-image {
+         text-align: center;
+      }
+      .nav-pills .nav-item {
+        margin-right: 10px; /* 調整右邊距 */
+      }
+    </style>
+</head>
+<body>
+
+  <nav id="navbar-example2" class="navbar bg-body-tertiary px-3 mb-3 fixed-top">
+    <a class="navbar-brand" href="#">糖尿病檢測網</a>
+    <ul class="nav nav-pills">
+
+      <li class="nav-item mr-2 mb-2">
+        <a class="nav-link custom-bg-orange text-white" href="#scrollspyHeading6">立即檢測</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarDropdown" role="button" aria-expanded="false">更多資訊</a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#scrollspyHeading1">糖尿病的定義</a></li>
+          <li><a class="dropdown-item" href="#scrollspyHeading2">糖尿病的類型</a></li>
+          <li><a class="dropdown-item" href="#scrollspyHeading3">糖尿病的症狀</a></li>
+          <li><a class="dropdown-item" href="#scrollspyHeading4">糖尿病的風險</a></li>
+          <li><a class="dropdown-item" href="#scrollspyHeading5">照顧與預防</a></li>
+          <li><a class="dropdown-item" href="#scrollspyHeading6">立即檢測</a></li>
+          <li><a class="dropdown-item" href="#scrollspyHeading7">關於我們</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+<div class="container custom-container">
+  <div class="content custom-content">
+    <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2" tabindex="0">
+      <h2 id="scrollspyHeading1">糖尿病的定義</h2>
+          <div class="center-image">
+            <img src="\static\definition.jpg" alt="definition" width="500">
+          </div>
+          <p>糖尿病是一種影響身體葡萄糖代謝的代謝性疾病。由於各種原因，它可以分為幾種類型，主要問題是體內胰島素的缺乏或功能障礙。這導致對糖的利用能力減少，最終導致血糖升高，或在嚴重情況下，完全無法利用葡萄糖。長時間以來，這可能導致其他嚴重併發症，如心臟病、視網膜病變、神經病變或腎病等。</p>
+          <p>在正常情況下，我們攝取的碳水化合物會分解為葡萄糖，也稱為血糖。這種葡萄糖釋放到血液中，引起血糖水平上升。隨後，胰臟分泌胰島素，促進葡萄糖進入細胞，滿足它們所需的能量。然而，糖尿病患者由於胰島素分泌不足或身體無法有效利用而導致高血糖水平。當血糖超過腎臟容量時，多餘的糖分將通過尿液排出，形成所謂的糖尿病。</p>
+          <p>根據國際糖尿病聯盟（IDF）在2021年的調查，全球20至79歲的約有5.37億人患有糖尿病，約佔全球總人口的十分之一。預測顯示，到2030年，糖尿病患者將增至6.43億，到2045年更將達到預估的7.83億。</p>
+          
+
+          
+      <br>
+      <h2 id="scrollspyHeading2">糖尿病的類型</h2>
+          <div class="center-image">
+            <img src="\static\type.png" alt="type" width="500">
+          </div>
+          <p>據衛生福利部統計處資料顯示，截至2022年，糖尿病在國人十大死因中排名第6，其死亡數較2021年增長了7.3％，成為死亡率增長最多的前三大疾病之一。然而，隨著飲食生活習慣的轉變，第二型糖尿病患者的數量也逐漸增加。</p>
+          <h4>糖尿病類型包括：</h4>
+          <ol>
+              <li>
+                  <h5>第一型糖尿病（Type 1 diabetes）：</h5>
+                  <p>第一型糖尿病（Type 1 diabetes）是糖尿病的一種，曾經被稱為幼年型糖尿病（Juvenile diabetes）或胰島素依賴型糖尿病（Insulin Dependent Diabetes Mellitus，簡稱IDDM），是一種慢性疾病。患者製造胰島素（Insulin）的細胞因自體免疫或病毒等問題遭到破壞，造成先天性胰島素缺乏。</p>
+              </li>
+      
+              <li>
+                  <h5>第二型糖尿病（Type 2 diabetes）：</h5>
+                  <p>第二型糖尿病患者的身體會抵抗胰島素（Insulin），此稱為胰島素阻抗（Insulin resistance）。胰島素是一種使血液中的葡萄糖（Glucose）進入細胞的激素，可以降低血液中的葡萄糖，但是當胰島素不能發揮作用時，就會出現高血糖。第二型糖尿病多半在成年後才被診斷出來，所以也被稱為成人發病型糖尿病（Adult-onset diabetes），但是現今有愈來愈多兒童被診斷出第二型糖尿病，可能是因為兒童肥胖的情況愈來愈普及。</p>
+              </li>
+      
+              <li>
+                  <h5>潛伏性成人自體免疫糖尿病（LADA）：</h5>
+                  <p>LADA是第一型糖尿病的一種形式。根據歐洲Action LADA 組織的行動研究長大衛萊斯理（David Leslie）教授的定義，LADA為30~50歲者最初被診斷為非胰島素依賴型糖尿病，且患者具有穀醯酸脫羧脢自體抗體（或稱麩胺酸脫羧酶自體抗體，Glutamic acid decarboxylase autoantibody，簡稱GAD-Ab）。</p>
+              </li>
+      
+              <li>
+                  <h5>其他型糖尿病：</h5>
+                  <p>又被稱為續發性糖尿病，是由其他疾病或治療引起的糖尿病，例如基因缺陷、胰臟疾病、內分泌疾病（如皮質類固醇過多、生長激素過多）或與相關藥物（例如注射生長激素及利尿劑、避孕藥及類固醇）有關。</p>
+              </li>
+      
+              <li>
+                  <h5>妊娠糖尿病（GDM）：</h5>
+                  <p>妊娠糖尿病（Gestational Diabetes）指的是懷孕前沒有糖尿病，懷孕之後才出現糖尿病的情形，而妊娠糖尿病也是最具代表性的高危險妊娠疾病之一，對媽媽和寶寶的健康都構成威脅。雖然尚未有大規模的研究統計，不過台灣妊娠糖尿病發生率約落在 2.6~13.4%，值得注意的是，近年台灣第二型糖尿病的發生率不斷攀升，再加上年輕化的趨勢，愈來愈多準媽媽可能在懷孕前就已是糖尿病前期或第二型糖尿病卻不自知，這時如果加上懷孕期間的荷爾蒙變化，會更難以控制血糖，進而對媽媽和寶寶造成傷害。</p>
+              </li>
+          </ol>
+
+      <br>
+      <h2 id="scrollspyHeading3">糖尿病的症狀</h2>
+      <div class="center-image">
+        <img src="\static\symptom.png" alt="symptom" width="500">
+      </div>
+      <p>第一型糖尿病患者在初期診斷時通常呈現多渴、多尿的症狀，並常伴隨糖尿病酮酸中毒。相較之下，大多數第二型糖尿病患者初期並未出現明顯症狀，直到進行血液檢測、出現高血糖相關症狀，或合併其他急性疾病、視力模糊、罹患心臟病等情況後，才發現罹患了這種疾病。</p>
+      <h5>糖尿病的相關症狀</h5>
+      <ul>
+          <li>口渴</li>
+          <li>頻尿</li>
+          <li>容易飢餓</li>
+          <li>體重無明顯原因下降</li>
+          <li>疲勞和虛弱</li>
+          <li>視力模糊</li>
+          <li>頭痛、頭暈</li>
+      </ul>
+      <h5>糖尿病就醫科別</h5>
+      <p>對於初次就醫或對糖尿病有疑慮的人來說，可能會不確定應該掛哪一科。一般而言，糖尿病的專科是內分泌新陳代謝科，若找不到相關門診，也可以先挂內科或家庭醫學科。</p>
+       
+
+
+      <br>
+      <h2 id="scrollspyHeading4">糖尿病的風險</h2>
+      <div class="center-image">
+        <img src="\static\risk.jpg" alt="risk" width="500">
+      </div>
+      <h5>第一型糖尿病風險</h5>
+      <p>由於第一型糖尿病與自體免疫問題相關，有第一型糖尿病家族病史的兒童、年輕族群罹患的可能性相對較高。家族同時有潛伏性成人自體免疫糖尿病（LADA）病史的人，在年滿30歲以後，也會有較高罹病的風險。</p>
+      <h5>第二型糖尿病風險</h5>
+      <p>第二型糖尿病主要受個人生活型態影響。糖尿病前期者、肥胖、年滿45歲、家人患有第二型糖尿病、每週運動少於3次、曾經患有妊娠糖尿病，或是出生超過4000克的人，都較可能成為第二型糖尿病患者。</p>
+      <h5>阿茲海默症與糖尿病</h5>
+      <p>近年研究顯示，阿茲海默症與糖尿病有明顯的關係。糖尿病前期者和第二型糖尿病患者在晚年罹患阿茲海默症風險更高，因此阿茲海默症也被稱為第三型糖尿病。</p>
+
+
+      <br>
+      <h2 id="scrollspyHeading5">照顧與預防</h2>
+      <div class="center-image">
+        <img src="\static\cure.jpg" alt="cure" width="500">
+      </div>
+      <h5>糖尿病的照顧</h5>
+      <p>糖尿病患者需要經常注意血糖水平，血糖過高或過低皆可能造成危險。此外，也有造成其他嚴重併發症的可能，例如罹患其他急性疾病或是引發感染，或是正在服用某些藥物等。為了避免這些問題，請確保正確服用糖尿病藥物，遵循糖尿病飲食並定期檢查血糖。</p>
+      <h5>糖尿病的預防</h5>
+      <p>第一型糖尿病與自身遺傳體質關係密切，或許沒有第二型糖尿病有明確的預防方法，但有鑒於近年第二型糖尿病的爆增，不管您是否為高危險群，都應該為了避免成為糖尿病一族，保持健康生活習慣。包括均衡飲食、維持適當體重及培養運動習慣，同時也應戒菸、避免吸入二手菸和過度飲酒，以減低將來患上糖尿病的機會。</p>
+
+      <br>
+      {% include 'form.html' %}
+      <br>
+      <h2 id="scrollspyHeading7">關於我們</h2>
+      <div class="center-image">
+        <img src="\static\aboutus.jpg" alt="about_us" width="500">
+      </div>
+      <p>我們是來自於台灣國立中央大學的團隊，致力於將機器學習概論所學知識應用於糖尿病之改善</p>
+      <p>團隊成員: 許郁翔、劉祐軒、陳冠庭、黃子菁、楊霆軒、戴仕庭</p>
+      <p>指導教授: 鐘祥仁 Ryan Chung</p>
+      <p>資料集來源: <a href="https://www.kaggle.com/datasets/julnazz/diabetes-health-indicators-dataset">Diabetes Health Indicators Dataset</a></p>
+      <p>參考網址[1]: <a href="https://www.commonhealth.com.tw/article/84355">糖尿病前兆可逆轉！4大初期症狀，從皮膚到腳自我檢測</a></p>
+      <p>參考網址[2]: <a href="https://helloyishi.com.tw/diabetes/what-is-diabetes/">認識糖尿病：原因、症狀、診斷、預防</a></p>
+      <p>參考網址[3]: <a href="https://www.healtheuropa.com/cells-that-produce-insulin-diabetes/91660/">Find out how cells that produce insulin could change the function in diabetes</a></p>
+
+
+    </div>
+  </div>
+</div>
+
+    <script>
+      // 在文檔渲染完成後執行
+      document.addEventListener('DOMContentLoaded', function () {
+        // 添加事件監聽器
+        document.getElementById('navbarDropdown').addEventListener('click', function () {
+          // 創建 Bootstrap Dropdown 實例
+          var dropdown = new bootstrap.Dropdown(this);
+
+          // 使用 toggle 方法切換下拉菜單的狀態
+          dropdown.toggle();
+        });
+      });
+      document.addEventListener('DOMContentLoaded', function () {
+        var prediction = "{{ prediction }}";
+
+        if (prediction && prediction.trim() !== '') {
+            // 獲取目標元素（這裡假設錨點的 ID 為 "scrollspyHeading6"）
+            var targetElement = document.getElementById('scrollspyHeading_result');
+
+            // 檢查目標元素是否存在
+            if (targetElement) {
+                // 計算滾動位置
+                var scrollPosition = targetElement.offsetTop - (window.innerHeight / 2);
+
+                // 使用 JavaScript 滾動到計算後的位置
+                window.scrollTo({
+                    top: scrollPosition,
+                    behavior: 'smooth'  // 若要啟用平滑滾動，可以使用 'smooth'
+                });
+            }
+        }
+    });
+    </script>
+    <!-- Bootstrap JavaScript dependencies (jQuery is required) -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="..." crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="..." crossorigin="anonymous"></script>
+    <script src="bootstrap.js"></script>    
+</body>
+</html>
