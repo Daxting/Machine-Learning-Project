@@ -129,14 +129,16 @@ def submit():
         predicted_class = result[0]  # 預測的類別
         class_probabilities = result_proba[0]  # 每個類別的概率
         if predicted_class == 2:
-            prediction = f'已有糖尿病 - 系統信心 {class_probabilities[2]:.10f}'
+            prediction = f'糖尿病高風險 - 系統信心 {class_probabilities[2]:.10f} %'
         elif predicted_class == 1:
-            prediction = f'糖尿病前期 - 系統信心 {class_probabilities[1]:.10f}'
+            prediction = f'糖尿病低風險 - 系統信心 {class_probabilities[1]:.10f} %'
         else:
-            prediction = f'身體健康 - 系統信心 {class_probabilities[0]:.10f}'
+            prediction = f'無糖尿病風險 - 系統信心 {class_probabilities[0]:.10f} %'
 
 
         #預選原本使用者勾選的選項
+        Height = form_data['Height']
+        Weight = form_data['Weight']
         # HighBP
         HighBP_Yes = ''
         HighBP_No = ''
@@ -151,19 +153,24 @@ def submit():
             HighChol_Yes = 'checked'
         else:
             HighChol_No = 'checked'
+        
+
         # GenHlth
+        GenHlth_0 = ''
         GenHlth_1 = ''
         GenHlth_2 = ''
         GenHlth_3 = ''
         GenHlth_4 = ''
         GenHlth_5 = ''
         if int(form_data['GenHlth']) == 0:
-            GenHlth_1 = 'selected'
+            GenHlth_0 = 'selected'
         elif int(form_data['GenHlth']) == 1:
-            GenHlth_2 = 'selected'
+            GenHlth_1 = 'selected'
         elif int(form_data['GenHlth']) == 2:
-            GenHlth_3 = 'selected'
+            GenHlth_2 = 'selected'
         elif int(form_data['GenHlth']) == 3:
+            GenHlth_3 = 'selected'
+        elif int(form_data['GenHlth']) == 4:
             GenHlth_4 = 'selected'
         else:
             GenHlth_5 = 'selected'
@@ -176,11 +183,11 @@ def submit():
             DiffWalk_No = 'checked'
 
         if type=='simple':
-            return render_template('index.html',HighBP_Yes=HighBP_Yes, HighBP_No=HighBP_No,
+            return render_template('index.html', Height=Height, Weight=Weight, HighBP_Yes=HighBP_Yes, HighBP_No=HighBP_No,
                     HighChol_Yes=HighChol_Yes, HighChol_No=HighChol_No,
-                    GenHlth_1=GenHlth_1, GenHlth_2=GenHlth_2, GenHlth_3=GenHlth_3, GenHlth_4=GenHlth_4, GenHlth_5=GenHlth_5,
-                    DiffWalk_Yes=DiffWalk_Yes, DiffWalk_No=DiffWalk_No,
-                    prediction=prediction)
+                    GenHlth_0=GenHlth_0, GenHlth_1=GenHlth_1, GenHlth_2=GenHlth_2, GenHlth_3=GenHlth_3,
+                    GenHlth_4=GenHlth_4, GenHlth_5=GenHlth_5,
+                    DiffWalk_Yes=DiffWalk_Yes, DiffWalk_No=DiffWalk_No, prediction=prediction)
         else:
             # CholCheck
             CholCheck_Yes = ''
@@ -256,69 +263,16 @@ def submit():
             Male = ''
             Female = ''
             if int(form_data['Sex']) == 1:
-                Male = 'selected'
+                Male = 'checked'
             else:
-                Female = 'selected'
-            # Age
-            Age_1 = ''
-            Age_2 = ''
-            Age_3 = ''
-            Age_4 = ''
-            Age_5 = ''
-            Age_6 = ''
-            Age_7 = ''
-            Age_8 = ''
-            Age_9 = ''
-            Age_10 = ''
-            Age_11 = ''
-            Age_12 = ''
-            Age_13 = ''
-            if int(form_data['Age']) == 0:
-                Age_1 = 'selected'
-            elif int(form_data['Age']) == 1:
-                Age_2 = 'selected'
-            elif int(form_data['Age']) == 2:
-                Age_3 = 'selected'
-            elif int(form_data['Age']) == 3:
-                Age_4 = 'selected'
-            elif int(form_data['Age']) == 4:
-                Age_5 = 'selected'
-            elif int(form_data['Age']) == 5:
-                Age_6 = 'selected'
-            elif int(form_data['Age']) == 6:
-                Age_7 = 'selected'
-            elif int(form_data['Age']) == 7:
-                Age_8 = 'selected'
-            elif int(form_data['Age']) == 8:
-                Age_9 = 'selected'
-            elif int(form_data['Age']) == 9:
-                Age_10 = 'selected'
-            elif int(form_data['Age']) == 10:
-                Age_11 = 'selected'
-            elif int(form_data['Age']) == 11:
-                Age_12 = 'selected'
-            else:
-                Age_13 = 'selected'
-            # Education
-            Education_1 = ''
-            Education_2 = ''
-            Education_3 = ''
-            Education_4 = ''
-            Education_5 = ''
-            Education_6 = ''
-            if int(form_data['Education']) == 0:
-                Education_1 = 'selected'
-            elif int(form_data['Education']) == 1:
-                Education_2 = 'selected'
-            elif int(form_data['Education']) == 2:
-                Education_3 = 'selected'
-            elif int(form_data['Education']) == 3:
-                Education_4 = 'selected'
-            elif int(form_data['Education']) == 4:
-                Education_5 = 'selected'
-            else:
-                Education_6 = 'selected'
-            return render_template('index.html',HighBP_Yes=HighBP_Yes, HighBP_No=HighBP_No,
+                Female = 'checked'
+
+            #menthlth
+            MentHealth=int(form_data['MentHlth'])
+            #physHlth
+            PhysHealth=int(form_data['PhysHlth'])
+
+            return render_template('index.html', Height=Height, Weight=Weight, HighBP_Yes=HighBP_Yes, HighBP_No=HighBP_No,
                             HighChol_Yes=HighChol_Yes, HighChol_No=HighChol_No,
                             CholCheck_Yes=CholCheck_Yes, CholCheck_No=CholCheck_No,
                             Smoker_Yes=Smoker_Yes, Smoker_No=Smoker_No,
@@ -330,13 +284,9 @@ def submit():
                             HvyAlcoholConsump_Yes=HvyAlcoholConsump_Yes, HvyAlcoholConsump_No=HvyAlcoholConsump_No,
                             AnyHealthcare_Yes=AnyHealthcare_Yes, AnyHealthcare_No=AnyHealthcare_No,
                             NoDocbcCost_Yes=NoDocbcCost_Yes, NoDocbcCost_No=NoDocbcCost_No,
-                            GenHlth_1=GenHlth_1, GenHlth_2=GenHlth_2, GenHlth_3=GenHlth_3, GenHlth_4=GenHlth_4, GenHlth_5=GenHlth_5,
+                            GenHlth_0=GenHlth_0, GenHlth_1=GenHlth_1, GenHlth_2=GenHlth_2, GenHlth_3=GenHlth_3, GenHlth_4=GenHlth_4, GenHlth_5=GenHlth_5,
                             DiffWalk_Yes=DiffWalk_Yes, DiffWalk_No=DiffWalk_No,
-                            Male=Male, Female=Female,
-                            Education_1=Education_1, Education_2=Education_2, Education_3=Education_3,
-                            Education_4=Education_4, Education_5=Education_5, Education_6=Education_6,
-                            Age_1=Age_1, Age_2=Age_2, Age_3=Age_3, Age_4=Age_4, Age_5=Age_5, Age_6=Age_6, Age_7=Age_7,
-                            Age_8=Age_8, Age_9=Age_9, Age_10=Age_10, Age_11=Age_11, Age_12=Age_12, Age_13=Age_13,
+                            Male=Male, Female=Female, MentHealth=MentHealth, PhysHealth=PhysHealth,
                             prediction=prediction)        
 
 if __name__ == "__main__":

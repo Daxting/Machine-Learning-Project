@@ -90,10 +90,10 @@
                 <input type="hidden" id="assessment_type_hidden" name="assessment_type_hidden" value="preliminary">
                 <div class="container-md d-flex justify-content-center">
                     <div class="mx-3 mb-3">
-                        <option type="button" class="btn btn-sm custom-orange-btn selected" data-assessment-type="preliminary" onclick="handleAssessment(this)">初步評估</option>
+                        <option type="button" class="btn btn-sm custom-orange-btn selected" data-assessment-type="preliminary" onclick="handleAssessment(this)">初步評估(問題x6)</option>
                     </div>
                     <div class="mx-3  mb-3">
-                        <option type="button" class="btn btn-sm custom-orange-btn" data-assessment-type="deep" onclick="handleAssessment(this)">深度評估</option>
+                        <option type="button" class="btn btn-sm custom-orange-btn" data-assessment-type="deep" onclick="handleAssessment(this)">深度評估(問題x21)</option>
                     </div>
                 </div>
                 <div class="container-md d-flex justify-content-center">
@@ -122,12 +122,20 @@
                     <label for="HighBP">是否有高血壓:</label>
                     <input type="radio" id="HighBP" name="HighBP" value="1" {{HighBP_Yes}}><label for="HighBP_Yes">有</label>
                     <input type="radio" id="HighBP" name="HighBP" value="0" {{HighBP_No}}><label for="HighBP_No">無</label>
+                    <!--explain the question start-->
+                    <button type="button" class="btn btn-sm custom-btn-exp" data-bs-toggle="popover" 
+                    data-bs-content="高血壓：收縮壓 140-159 mmHg以上 或舒張壓 90-99 mmHg以上。"><i class="bi">?</i></button>
+                    <!--explain the question end-->
                     <br><br>
                     <label for="HighChol">是否有高膽固醇:</label>
                     <input type="radio" id="HighChol" name="HighChol" value="1" {{HighChol_Yes}}><label for="HighChol_Yes">有</label>
                     <input type="radio" id="HighChol" name="HighChol" value="0" {{HighChol_No}}><label for="HighChol_No">無</label>
+                    <!--explain the question start-->
+                    <button type="button" class="btn btn-sm custom-btn-exp" data-bs-toggle="popover" 
+                    data-bs-content="高膽固醇:低密度脂蛋白膽固醇大於130-159 mg/dL 。"><i class="bi">?</i></button>
+                    <!--explain the question end-->
                     <br><br>   
-                    <label for="DiffWalk">走路或爬樓梯困難:</label>
+                    <label for="DiffWalk">是否走路或爬樓梯困難:</label>
                     <input type="radio" id="DiffWalk" name="DiffWalk" value="1" {{DiffWalk_Yes}}><label for="DiffWalk_Yes">是</label>
                     <input type="radio" id="DiffWalk" name="DiffWalk" value="0" {{DiffWalk_No}}><label for="DiffWalk_No">否</label>
                     <br><br>
@@ -140,23 +148,14 @@
                         <option value="5" {{GenHlth_5}}>非常差</option>
                     </select>
                     <br><br>
-
-                    <!-- 下兩行可用於解釋問題 -->
-                    <!-- <button type="button" class="btn btn-sm custom-btn-exp" data-bs-toggle="popover" 
-                    data-bs-content="解釋內文"><i class="bi">?</i></button>
-                    <br> -->
-                    <!-- 上兩行可用於解釋問題 -->
-
-
                     <!-- 第二階段: data-assessment-type="deep" -->
                     <!-- ['CholCheck', 'Smoker', 'Stroke', 'HeartDiseaseorAttack', 'PhysActivity', 'Fruits', 'Veggies', 'HvyAlcoholConsump', 'AnyHealthcare'
                         , 'NoDocbcCost', 'MentHlth', 'PhysHlth', 'Sex', 'Age', 'Education'] -->
                     <div id="dependentsSection" style="display: none;">
-                        <label for="Sex">性別:</label>
+                        <label for="Sex">生理性別:</label>
                         <input type="radio" id="Sex" name="Sex" value="1" {{Male}}><label for="Male">男性</label>
                         <input type="radio" id="Sex" name="Sex" value="0" {{Female}}><label for="Female">女性</label>
                         <br><br>
-
                         <label for="Age">年齡:</label>
                         <select name="Age" id="Age">
                             <option value="0" {{Age_1}}>18~24歲</option>
@@ -184,25 +183,36 @@
                             <option value="6" {{Education_6}}>大學以上</option>
                         </select>
                         <br><br>
-                        <label for="MentHlth">心理健康狀況不佳的天數(/月):</label>
-                        <input type="range" id="MentHlth" name="MentHlth" min="0" max="30" value="0" step="1">
-                        <span id="rangeValue">0</span>
+                        <label for="MentHlth">心理健康狀況不佳的天數(每月):</label>
+                        <input type="range" id="MentHlth" name="MentHlth" min="0" max="30" value={{MentHealth}} step="1">
+                        <span id="rangeValue">{{MentHealth}}</span>
                         <br><br>
-                        <label for="PhysHlth">身體健康狀況不佳的天數(/月):</label>
-                        <input type="range" id="PhysHlth" name="PhysHlth" min="0" max="30" value="0" step="1">
-                        <span id="rangeValue_p">0</span>
+                        <label for="PhysHlth">身體健康狀況不佳的天數(每月):</label>
+                        <input type="range" id="PhysHlth" name="PhysHlth" min="0" max="30" value={{PhysHealth}} step="1">
+                        <span id="rangeValue_p">{{PhysHealth}}</span>
                         <br><br>
                         <label for="Fruits">每天吃一份或以上水果:</label>
                         <input type="radio" id="Fruits" name="Fruits" value="1" {{Fruits_Yes}}><label for="Fruits_Yes">有</label>
                         <input type="radio" id="Fruits" name="Fruits" value="0" {{Fruits_No}}><label for="Fruits_No">無</label>
+                        <!--explain the question start-->
+                        <button type="button" class="btn btn-sm custom-btn-exp" data-bs-toggle="popover" 
+                        data-bs-content="參考: 一份水果的大小大約是一個網球大小。"><i class="bi">?</i></button>
+                        <!--explain the question end-->
                         <br><br>
                         <label for="Veggies">每天吃一份或以上蔬菜:</label>
                         <input type="radio" id="Veggies" name="Veggies" value="1" {{Veggies_Yes}}><label for="Veggies_Yes">是</label>
                         <input type="radio" id="Veggies" name="Veggies" value="0" {{Veggies_No}}><label for="Veggies_No">否</label>
+                        <button type="button" class="btn btn-sm custom-btn-exp" data-bs-toggle="popover" 
+                        data-bs-content="參考: 一份生蔬菜大約相當於 100 克，大約是一個中等大小的番茄、一根小黃瓜，或者一把生菠菜。"><i class="bi">?</i></button>
+                        <!--explain the question end-->
                         <br><br>
                         <label for="HvyAlcoholConsump">大量飲酒:</label>
                         <input type="radio" id="HvyAlcoholConsump" name="HvyAlcoholConsump" value="1" {{HvyAlcoholConsump_Yes}}><label for="HvyAlcoholConsump_Yes">是</label>
                         <input type="radio" id="HvyAlcoholConsump" name="HvyAlcoholConsump" value="0" {{HvyAlcoholConsump_No}}><label for="HvyAlcoholConsump_No">否</label>
+                        <!--explain the question start-->
+                        <button type="button" class="btn btn-sm custom-btn-exp" data-bs-toggle="popover" 
+                        data-bs-content="參考:每日喝超過400毫升的10度酒精飲品。"><i class="bi">?</i></button>
+                        <!--explain the question end-->
                         <br><br>
                         <label for="Stroke">中風:</label>
                         <input type="radio" id="Stroke" name="Stroke" value="1" {{Stroke_Yes}}><label for="Stroke_Yes">有</label>
@@ -211,6 +221,10 @@
                         <label for="HeartDiseaseorAttack">冠狀動脈心臟疾病或心肌梗塞:</label>
                         <input type="radio" id="HeartDiseaseorAttack" name="HeartDiseaseorAttack" value="1" {{HeartDiseaseorAttack_Yes}}><label for="HeartDiseaseorAttack_Yes">有</label>
                         <input type="radio" id="HeartDiseaseorAttack" name="HeartDiseaseorAttack" value="0" {{HeartDiseaseorAttack_No}}><label for="HeartDiseaseorAttack_No">無</label>
+                        <!--explain the question start-->
+                        <button type="button" class="btn btn-sm custom-btn-exp" data-bs-toggle="popover" 
+                        data-bs-content="解釋:冠狀動脈心臟疾病是冠狀動脈硬化，導致心肌梗塞。心肌梗塞為心臟部分肌肉缺血，可能導致嚴重胸痛、噁心、嘔吐，需緊急就醫。"><i class="bi">?</i></button>
+                        <!--explain the question end-->
                         <br><br>
                         <label for="CholCheck">五年內是否有膽固醇檢查:</label>
                         <input type="radio" id="CholCheck" name="CholCheck" value="1" {{CholCheck_Yes}}><label for="CholCheck_Yes">有</label>
@@ -227,6 +241,10 @@
                         <label for="PhysActivity">30天內有體力活動(不包含工作):</label>
                         <input type="radio" id="PhysActivity" name="PhysActivity" value="1" {{PhysActivity_Yes}}><label for="PhysActivity_Yes">有</label>
                         <input type="radio" id="PhysActivity" name="PhysActivity" value="0" {{PhysActivity_No}}><label for="PhysActivity_No">無</label>
+                        <!--explain the question start-->
+                        <button type="button" class="btn btn-sm custom-btn-exp" data-bs-toggle="popover" 
+                        data-bs-content="定義:體力活動為運動30分鐘(含)以上。"><i class="bi">?</i></button>
+                        <!--explain the question end-->
                         <br><br>
                         <label for="Smoker">人生中是否抽超過100根香菸(五包):</label>
                         <input type="radio" id="Smoker" name="Smoker" value="1" {{Smoker_Yes}}><label for="Smoker_Yes">有</label>
@@ -321,23 +339,25 @@
     </script>
 
     <script>
-        // 當拉bar值改變時觸發的JavaScript事件
-        document.getElementById('MentHlth').addEventListener('input', function() {
-            // 獲取拉bar的值
-            var value = this.value;
-            
-            // 將值顯示在span元素中
-            document.getElementById('rangeValue').textContent = value;
+        // Function to update the span based on the range input value
+        function updateRangeValue(inputId, spanId) {
+            var value = document.getElementById(inputId).value;
+            document.getElementById(spanId).textContent = value;
+        }
+
+        // Call the function to set the initial values
+        updateRangeValue('MentHlth', 'rangeValue');
+        updateRangeValue('PhysHlth', 'rangeValue_p');
+
+        // Event listener for MentHlth
+        document.getElementById('MentHlth').addEventListener('input', function () {
+            updateRangeValue('MentHlth', 'rangeValue');
         });
-        // 當拉bar值改變時觸發的JavaScript事件
-        document.getElementById('PhysHlth').addEventListener('input', function() {
-            // 獲取拉bar的值
-            var value = this.value;
-            
-            // 將值顯示在span元素中
-            document.getElementById('rangeValue_p').textContent = value;
+
+        // Event listener for PhysHlth
+        document.getElementById('PhysHlth').addEventListener('input', function () {
+            updateRangeValue('PhysHlth', 'rangeValue_p');
         });
     </script>
-
     </body>
 </html>
