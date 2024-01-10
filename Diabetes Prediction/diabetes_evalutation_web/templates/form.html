@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="..." crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.19.0/font/bootstrap-icons.css">
+    <style>
+      .navbar-brand{
+          color: rgb(0, 42, 212) !important;
+          font-size: 35px !important;
+          font-weight: bold;
+      }
+      .custom-bg-orange {
+          background-color: rgb(255, 145, 0); /* 黄橘色的十六进制表示 */
+      }
+      body {
+          padding-top: 80px; /* 或者根据导航栏的实际高度进行调整 */
+          background-color: #f8f9fa !important;
+      }
+
+      .custom-container {
+        background-color: #f8f9fa; /* 纯白色的十六进制表示 */
+        max-width: 800px; /* 调整最大宽度，根据需要进行调整 */
+        margin: 0 auto; /* 让内容居中 */
+      }
+      .custom-content {
+        background-color: #f8f9fa  !important; /* 纯白色的十六进制表示 */
+        padding: 15px; /* 可选：添加一些内边距以增加内容与边缘的距离 */
+      }
+      #navbar-example2 {
+        background-color: #baf6ff51 !important; 
+      }
+      h2 {
+        color: #007bff; /* H2 文本颜色，可以根据整体设计调整 */
+        border-bottom: 2px solid #007bff; /* H2 下边框特效，可以根据整体设计调整 */
+      }
+      .custom-h2-yellow {
+        color: rgb(255, 145, 0); /* 设置特定 h2 元素的文本颜色为黄色 */
+        border-bottom: 2px solid rgb(255, 145, 0);
+      }
+      .center-image {
+         text-align: center;
+      }
+    
+
+      .emphasis-container {
+        border: 2px solid rgb(255, 145, 0); /* 加粗的藍色邊框 */
+        padding: 15px; /* 可以根據需要調整內邊距 */
+        border-radius: 10px; /* 可以根據需要添加邊角半徑 */
+      }
+
+    .container-md button {
+        margin-right: 10px; /* 调整右侧按钮的间距 */
+    }
+    .custom-orange-btn {
+        background-color: rgb(255, 145, 0);
+        color: #ffffff;
+    }
+    .custom-orange-btn.selected {
+        background-color: red;
+        /* 你的其他樣式 */
+    }
+
+    .custom-btn-exp {
+        background-color: #ffe100; /* 黃色底色 */
+        color: rgb(255, 145, 0); 
+        font-weight:700;
+        border-radius: 50%; /* 設置圓角比例為 50% */
+        /* 其他樣式調整，根據需要添加 */
+    }
+
+    </style>
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="..." crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="..." crossorigin="anonymous"></script>
+    
+
+
+    <h2 class="custom-h2-yellow" id="scrollspyHeading6">立即檢測</h2>
+    <div class="center-image">
+        <img src="\static\test.jpg" alt="test" width="500">
+    </div>
+    <br>
+    <!-- fieldsetOption,Education,TotalIncome,Dependents -->
+    <div class="container-md">
+        <div class="emphasis-container">
+            <form class="needs-validation" action="/submit" method="post" enctype="multipart/form-data" novalidate>
+                <input type="hidden" id="assessment_type_hidden" name="assessment_type_hidden" value="preliminary">
+                <div class="container-md d-flex justify-content-center">
+                    <div class="mx-3 mb-3">
+                        <option type="button" class="btn btn-sm custom-orange-btn selected" data-assessment-type="preliminary" onclick="handleAssessment(this)">初步評估(問題x6)</option>
+                    </div>
+                    <div class="mx-3  mb-3">
+                        <option type="button" class="btn btn-sm custom-orange-btn" data-assessment-type="deep" onclick="handleAssessment(this)">深度評估(問題x21)</option>
+                    </div>
+                </div>
+                <div class="container-md d-flex justify-content-center">
+                    <div class="mb-3">
+                        <label style="font-size: 20px;">授權填寫資料作為研究用途:</label>
+                        <input type="radio" name="fieldsetOption" value="enable" onclick="enableFieldset()"> 同意
+                        <input type="radio" name="fieldsetOption" value="disable" onclick="disableFieldset()"> 不同意
+                    </div>
+                </div>
+
+                <fieldset id="myFieldset" disabled>
+
+                    <!-- 分兩種來討論，當deep情況會出現較多選項
+                    data-assessment-type="preliminary"
+                    data-assessment-type="deep" -->
+
+                    <legend>糖尿病評估表</legend>
+                    <!-- 第一階段: data-assessment-type="preliminary" -->
+                    <!-- #['HighBP', 'HighChol', 'BMI', 'GenHlth', 'DiffWalk'] -->
+                    <label for="Height">身高:(單位:公分)</label>
+                    <input type="text" id="Height" name="Height" value="{{Height}}">
+                    <br><br>
+                    <label for="Weight">體重:(單位:公斤)</label>
+                    <input type="text" id="Weight" name="Weight" value="{{Weight}}">
+                    <br><br>
+                    <label for="HighBP">是否有高血壓:</label>
+                    <input type="radio" id="HighBP" name="HighBP" value="1" {{HighBP_Yes}}><label for="HighBP_Yes">有</label>
+                    <input type="radio" id="HighBP" name="HighBP" value="0" {{HighBP_No}}><label for="HighBP_No">無</label>
+                    <!--explain the question start-->
+                    <button type="button" class="btn btn-sm custom-btn-exp" data-bs-toggle="popover" 
+                    data-bs-content="高血壓：收縮壓 140-159 mmHg以上 或舒張壓 90-99 mmHg以上。"><i class="bi">?</i></button>
+                    <!--explain the question end-->
+                    <br><br>
+                    <label for="HighChol">是否有高膽固醇:</label>
+                    <input type="radio" id="HighChol" name="HighChol" value="1" {{HighChol_Yes}}><label for="HighChol_Yes">有</label>
+                    <input type="radio" id="HighChol" name="HighChol" value="0" {{HighChol_No}}><label for="HighChol_No">無</label>
+                    <!--explain the question start-->
+                    <button type="button" class="btn btn-sm custom-btn-exp" data-bs-toggle="popover" 
+                    data-bs-content="高膽固醇:低密度脂蛋白膽固醇大於130-159 mg/dL 。"><i class="bi">?</i></button>
+                    <!--explain the question end-->
+                    <br><br>   
+                    <label for="DiffWalk">是否走路或爬樓梯困難:</label>
+                    <input type="radio" id="DiffWalk" name="DiffWalk" value="1" {{DiffWalk_Yes}}><label for="DiffWalk_Yes">是</label>
+                    <input type="radio" id="DiffWalk" name="DiffWalk" value="0" {{DiffWalk_No}}><label for="DiffWalk_No">否</label>
+                    <br><br>
+                    <label for="GenHlth">整體健康:</label>
+                    <select name="GenHlth" id="GenHlth">
+                        <option value="1" {{GenHlth_1}}>非常好</option>
+                        <option value="2" {{GenHlth_2}}>普通偏好</option>
+                        <option value="3" {{GenHlth_3}}>普通</option>
+                        <option value="4" {{GenHlth_4}}>普通偏差</option>
+                        <option value="5" {{GenHlth_5}}>非常差</option>
+                    </select>
+                    <br><br>
+                    <!-- 第二階段: data-assessment-type="deep" -->
+                    <!-- ['CholCheck', 'Smoker', 'Stroke', 'HeartDiseaseorAttack', 'PhysActivity', 'Fruits', 'Veggies', 'HvyAlcoholConsump', 'AnyHealthcare'
+                        , 'NoDocbcCost', 'MentHlth', 'PhysHlth', 'Sex', 'Age', 'Education'] -->
+                    <div id="dependentsSection" style="display: none;">
+                        <label for="Sex">生理性別:</label>
+                        <input type="radio" id="Sex" name="Sex" value="1" {{Male}}><label for="Male">男性</label>
+                        <input type="radio" id="Sex" name="Sex" value="0" {{Female}}><label for="Female">女性</label>
+                        <br><br>
+                        <label for="Age">年齡:</label>
+                        <select name="Age" id="Age">
+                            <option value="0" {{Age_1}}>18~24歲</option>
+                            <option value="1" {{Age_2}}>24~29歲</option>
+                            <option value="2" {{Age_3}}>29~34歲</option>
+                            <option value="3" {{Age_4}}>34~39歲</option>
+                            <option value="4" {{Age_5}}>39~44歲</option>
+                            <option value="5" {{Age_6}}>44~49歲</option>
+                            <option value="6" {{Age_7}}>49~54歲</option>
+                            <option value="7" {{Age_8}}>54~59歲</option>
+                            <option value="8" {{Age_9}}>59~64歲</option>
+                            <option value="9" {{Age_10}}>64~69歲</option>
+                            <option value="10" {{Age_11}}>69~74歲</option>
+                            <option value="11" {{Age_12}}>74~79歲</option>
+                            <option value="12" {{Age_13}}>80(含)以上歲</option>
+                        </select>
+                        <br><br>
+                        <label for="Education">教育程度:</label>
+                        <select name="Education" id="Education">
+                            <option value="1" {{Education_1}}>未受過教育</option>
+                            <option value="2" {{Education_2}}>小學</option>
+                            <option value="3" {{Education_3}}>國中</option>
+                            <option value="4" {{Education_4}}>高中</option>
+                            <option value="5" {{Education_5}}>大學(肄業)</option>
+                            <option value="6" {{Education_6}}>大學以上</option>
+                        </select>
+                        <br><br>
+                        <label for="MentHlth">心理健康狀況不佳的天數(每月):</label>
+                        <input type="range" id="MentHlth" name="MentHlth" min="0" max="30" value={{MentHealth}} step="1">
+                        <span id="rangeValue">{{MentHealth}}</span>
+                        <br><br>
+                        <label for="PhysHlth">身體健康狀況不佳的天數(每月):</label>
+                        <input type="range" id="PhysHlth" name="PhysHlth" min="0" max="30" value={{PhysHealth}} step="1">
+                        <span id="rangeValue_p">{{PhysHealth}}</span>
+                        <br><br>
+                        <label for="Fruits">每天吃一份或以上水果:</label>
+                        <input type="radio" id="Fruits" name="Fruits" value="1" {{Fruits_Yes}}><label for="Fruits_Yes">有</label>
+                        <input type="radio" id="Fruits" name="Fruits" value="0" {{Fruits_No}}><label for="Fruits_No">無</label>
+                        <!--explain the question start-->
+                        <button type="button" class="btn btn-sm custom-btn-exp" data-bs-toggle="popover" 
+                        data-bs-content="參考: 一份水果的大小大約是一個網球大小。"><i class="bi">?</i></button>
+                        <!--explain the question end-->
+                        <br><br>
+                        <label for="Veggies">每天吃一份或以上蔬菜:</label>
+                        <input type="radio" id="Veggies" name="Veggies" value="1" {{Veggies_Yes}}><label for="Veggies_Yes">是</label>
+                        <input type="radio" id="Veggies" name="Veggies" value="0" {{Veggies_No}}><label for="Veggies_No">否</label>
+                        <button type="button" class="btn btn-sm custom-btn-exp" data-bs-toggle="popover" 
+                        data-bs-content="參考: 一份生蔬菜大約相當於 100 克，大約是一個中等大小的番茄、一根小黃瓜，或者一把生菠菜。"><i class="bi">?</i></button>
+                        <!--explain the question end-->
+                        <br><br>
+                        <label for="HvyAlcoholConsump">大量飲酒:</label>
+                        <input type="radio" id="HvyAlcoholConsump" name="HvyAlcoholConsump" value="1" {{HvyAlcoholConsump_Yes}}><label for="HvyAlcoholConsump_Yes">是</label>
+                        <input type="radio" id="HvyAlcoholConsump" name="HvyAlcoholConsump" value="0" {{HvyAlcoholConsump_No}}><label for="HvyAlcoholConsump_No">否</label>
+                        <!--explain the question start-->
+                        <button type="button" class="btn btn-sm custom-btn-exp" data-bs-toggle="popover" 
+                        data-bs-content="參考:每日喝超過400毫升的10度酒精飲品。"><i class="bi">?</i></button>
+                        <!--explain the question end-->
+                        <br><br>
+                        <label for="Stroke">中風:</label>
+                        <input type="radio" id="Stroke" name="Stroke" value="1" {{Stroke_Yes}}><label for="Stroke_Yes">有</label>
+                        <input type="radio" id="Stroke" name="Stroke" value="0" {{Stroke_No}}><label for="Stroke_No">無</label>
+                        <br><br>
+                        <label for="HeartDiseaseorAttack">冠狀動脈心臟疾病或心肌梗塞:</label>
+                        <input type="radio" id="HeartDiseaseorAttack" name="HeartDiseaseorAttack" value="1" {{HeartDiseaseorAttack_Yes}}><label for="HeartDiseaseorAttack_Yes">有</label>
+                        <input type="radio" id="HeartDiseaseorAttack" name="HeartDiseaseorAttack" value="0" {{HeartDiseaseorAttack_No}}><label for="HeartDiseaseorAttack_No">無</label>
+                        <!--explain the question start-->
+                        <button type="button" class="btn btn-sm custom-btn-exp" data-bs-toggle="popover" 
+                        data-bs-content="解釋:冠狀動脈心臟疾病是冠狀動脈硬化，導致心肌梗塞。心肌梗塞為心臟部分肌肉缺血，可能導致嚴重胸痛、噁心、嘔吐，需緊急就醫。"><i class="bi">?</i></button>
+                        <!--explain the question end-->
+                        <br><br>
+                        <label for="CholCheck">五年內是否有膽固醇檢查:</label>
+                        <input type="radio" id="CholCheck" name="CholCheck" value="1" {{CholCheck_Yes}}><label for="CholCheck_Yes">有</label>
+                        <input type="radio" id="CholCheck" name="CholCheck" value="0" {{CholCheck_No}}><label for="CholCheck_No">無</label>
+                        <br><br>
+                        <label for="AnyHealthcare">有任何健康保險:</label>
+                        <input type="radio" id="AnyHealthcare" name="AnyHealthcare" value="1" {{AnyHealthcare_Yes}}><label for="AnyHealthcare_Yes">是</label>
+                        <input type="radio" id="AnyHealthcare" name="AnyHealthcare" value="0" {{AnyHealthcare_No}}><label for="AnyHealthcare_No">否</label>
+                        <br><br>
+                        <label for="NoDocbcCost">無力看醫生(經濟負擔):</label>
+                        <input type="radio" id="NoDocbcCost" name="NoDocbcCost" value="1" {{NoDocbcCost_Yes}}><label for="NoDocbcCost_Yes">是</label>
+                        <input type="radio" id="NoDocbcCost" name="NoDocbcCost" value="0" {{NoDocbcCost_No}}><label for="NoDocbcCost_No">否</label>
+                        <br><br>
+                        <label for="PhysActivity">30天內有體力活動(不包含工作):</label>
+                        <input type="radio" id="PhysActivity" name="PhysActivity" value="1" {{PhysActivity_Yes}}><label for="PhysActivity_Yes">有</label>
+                        <input type="radio" id="PhysActivity" name="PhysActivity" value="0" {{PhysActivity_No}}><label for="PhysActivity_No">無</label>
+                        <!--explain the question start-->
+                        <button type="button" class="btn btn-sm custom-btn-exp" data-bs-toggle="popover" 
+                        data-bs-content="定義:體力活動為運動30分鐘(含)以上。"><i class="bi">?</i></button>
+                        <!--explain the question end-->
+                        <br><br>
+                        <label for="Smoker">人生中是否抽超過100根香菸(五包):</label>
+                        <input type="radio" id="Smoker" name="Smoker" value="1" {{Smoker_Yes}}><label for="Smoker_Yes">有</label>
+                        <input type="radio" id="Smoker" name="Smoker" value="0" {{Smoker_No}}><label for="Smoker_No">無</label>
+                        <br><br>
+                    </div>
+                     <!-- 進行評估 -->
+                    <div class="container-md d-flex justify-content-center">
+                        <input type="submit" value="進行評估">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <br>
+    <div>
+        {% if prediction %}
+            <p id=scrollspyHeading_result style="border: 5px solid #964b0093; padding: 10px; font-size: 20px ; font-weight: bold;">評估結果 : {{prediction}}</p>
+        {% endif %}
+    </div>
+
+    <script>
+        function enableFieldset() {
+            var fieldset = document.getElementById('myFieldset');
+            fieldset.removeAttribute('disabled');
+        }
+        function disableFieldset() {
+            var fieldset = document.getElementById('myFieldset');
+            fieldset.setAttribute('disabled', 'disabled');
+        }
+        function handleAssessment(button) {
+            clearFormFields(['MentHlth', 'PhysHlth', 'Age', 'Education']);
+            // 移除所有按鈕的 selected 類別
+            var buttons = document.querySelectorAll('.custom-orange-btn');
+            buttons.forEach(function (btn) {
+                btn.classList.remove('selected');
+            });
+            // 获取被点击的按钮元素
+            var clickedButton = button;
+            // 将被点击的按钮加上 selected 類別
+            clickedButton.classList.add('selected');
+            // 获取按钮的 data-assessment-type 属性值
+            var assessmentType = clickedButton.getAttribute('data-assessment-type');
+            // 设置按钮的自定义属性，比如 data-assessment-type
+            clickedButton.setAttribute('data-assessment-type', assessmentType);
+            // 其他处理逻辑...
+            if (assessmentType === 'deep') {
+                dependentsSection.style.display = 'block';
+                enableFields(['MentHlth', 'PhysHlth', 'Age', 'Education']);
+            } else {
+                dependentsSection.style.display = 'none';
+                disableFields(['MentHlth', 'PhysHlth', 'Age', 'Education']);
+            }
+            document.getElementById('assessment_type_hidden').value = assessmentType;
+        }
+        function disableFields(fields) {
+            fields.forEach(function (fieldName) {
+                var field = document.getElementById(fieldName);
+                if (field) {
+                    field.setAttribute('disabled', 'disabled');
+                }
+            });
+        }
+        function enableFields(fields) {
+            fields.forEach(function (fieldName) {
+                var field = document.getElementById(fieldName);
+                if (field) {
+                    field.removeAttribute('disabled');
+                }
+            });
+        }
+        function clearFormFields(fields) {
+            fields.forEach(function (fieldName) {
+                var field = document.getElementById(fieldName);
+                if (field) {
+                    // 清除值
+                    field.value = '';
+                    // 移除 disabled 屬性
+                    field.removeAttribute('disabled');
+                }
+            });
+        }
+
+    </script>
+
+    <script>
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl);
+        });
+    </script>
+
+    <script>
+        // Function to update the span based on the range input value
+        function updateRangeValue(inputId, spanId) {
+            var value = document.getElementById(inputId).value;
+            document.getElementById(spanId).textContent = value;
+        }
+
+        // Call the function to set the initial values
+        updateRangeValue('MentHlth', 'rangeValue');
+        updateRangeValue('PhysHlth', 'rangeValue_p');
+
+        // Event listener for MentHlth
+        document.getElementById('MentHlth').addEventListener('input', function () {
+            updateRangeValue('MentHlth', 'rangeValue');
+        });
+
+        // Event listener for PhysHlth
+        document.getElementById('PhysHlth').addEventListener('input', function () {
+            updateRangeValue('PhysHlth', 'rangeValue_p');
+        });
+    </script>
+    </body>
+</html>
