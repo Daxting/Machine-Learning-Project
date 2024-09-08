@@ -14,7 +14,9 @@ This project developed a machine learning  model  to  predict  diabetes onset ba
 
 Fig. 1 Datasets vidualization by seaborn package 
 
-*ML Model  Recall LogisticRegression*  83.6% *RandomForestClassifier*  82.7% *DecisionTreeClassifier*  75.9% *KNeighborsClassifier*  82.1% *GradientBoostingClassifier*  84.0% 
+
+![image](https://github.com/user-attachments/assets/4245aebf-bffb-43e9-98e2-5f7ad7e6b1cd)
+
 
 Fig. 2 the recall of different models 
 
