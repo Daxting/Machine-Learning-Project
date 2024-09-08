@@ -3,11 +3,13 @@
 - Perform  machine  learning using scikit-learn in Python. 
 - Deploy models on a website using Python's flask package. 
 - Improve  website  user experience  with  CSS  and JavaScript, aided by ChatGPT.
-- 
+  
 2. **Introduction** 
 This project developed a machine learning  model  to  predict  diabetes onset based on medical and lifestyle data.  It  features  meticulous  model selection,  testing,  and  fine-tuning, along  with  comprehensive  analysis. Additionally,  the  project  includes  a practical  application  by  deploying these models on a website system. 
 
 3. **Implementation Results**
+
+
 ![image](https://github.com/user-attachments/assets/666ed38d-89b4-44cb-b527-ffe27f5b21f3)
 
 Fig. 1 Datasets vidualization by seaborn package 
