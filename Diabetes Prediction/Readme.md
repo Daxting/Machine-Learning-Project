@@ -1,7 +1,3 @@
-**I.   “ Introduction to machine learning” Project**  
-
-**Project Topic : Diabetes Probability Evaluation Website ![](Aspose.Words.f9ba925c-9ea1-43cb-88fb-8704e78e1d9c.001.png)**
-
 1. **Programming languages** 
 - Analyze  datasets  with Python's seaborn package. 
 - Perform  machine  learning using scikit-learn in Python. 
@@ -11,9 +7,7 @@
 
 This project developed a machine learning  model  to  predict  diabetes onset based on medical and lifestyle data.  It  features  meticulous  model selection,  testing,  and  fine-tuning, along  with  comprehensive  analysis. Additionally,  the  project  includes  a practical  application  by  deploying these models on a website system. 
 
-3. **Implementation Results** 
-
-![](Aspose.Words.f9ba925c-9ea1-43cb-88fb-8704e78e1d9c.002.png)
+3. **Implementation Results**
 
 Fig. 1 Datasets vidualization by seaborn package 
 
