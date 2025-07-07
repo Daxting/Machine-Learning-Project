@@ -112,23 +112,67 @@ def submit():
         print("-----processed_data basic info end-----")
         if(type=='simple'):
             #['HighBP', 'HighChol', 'BMI', 'GenHlth', 'DiffWalk']
-            result = model_simple_pretrained.predict([[int(processed_data['HighBP']), int(processed_data['HighChol'])
-                , int(processed_data['DiffWalk']),int(processed_data['GenHlth']),int(processed_data['BMI'])]])
-            result_proba = model_simple_pretrained.predict_proba([[int(processed_data['HighBP']), int(processed_data['HighChol'])
-                , int(processed_data['DiffWalk']),int(processed_data['GenHlth']),int(processed_data['BMI'])]])
+            result = model_simple_pretrained.predict([[
+                int(processed_data['HighBP'].iloc[0]),
+                int(processed_data['HighChol'].iloc[0]),
+                int(processed_data['DiffWalk'].iloc[0]),
+                int(processed_data['GenHlth'].iloc[0]),
+                int(processed_data['BMI'].iloc[0])
+            ]])
+            result_proba = model_simple_pretrained.predict_proba([[
+                int(processed_data['HighBP'].iloc[0]),
+                int(processed_data['HighChol'].iloc[0]),
+                int(processed_data['DiffWalk'].iloc[0]),
+                int(processed_data['GenHlth'].iloc[0]),
+                int(processed_data['BMI'].iloc[0])
+            ]])
         else:   
             #['HighBP', 'HighChol', 'CholCheck', 'BMI', 'Smoker', 'Stroke', 'HeartDiseaseorAttack', 'PhysActivity', 'Fruits', 'Veggies', 
             #'HvyAlcoholConsump', 'AnyHealthcare', 'NoDocbcCost', 'GenHlth', 'MentHlth', 'PhysHlth', 'DiffWalk', 'Sex', 'Age', 'Education']
-            result = model_complex_pretrained.predict([[int(processed_data['HighBP']), int(processed_data['HighChol']), int(form_data['CholCheck'])
-                , int(processed_data['BMI']), int(form_data['Smoker']), int(form_data['Stroke']), int(form_data['HeartDiseaseorAttack'])
-                , int(form_data['PhysActivity']), int(form_data['Fruits']), int(form_data['Veggies']), int(form_data['HvyAlcoholConsump'])
-                , int(form_data['AnyHealthcare']), int(form_data['NoDocbcCost']), int(form_data['GenHlth']), int(form_data['MentHlth'])
-                , int(form_data['PhysHlth']), int(form_data['DiffWalk']), int(form_data['Sex']), int(form_data['Age']), int(form_data['Education']), ]])
-            result_proba = model_complex_pretrained.predict_proba([[int(processed_data['HighBP']), int(processed_data['HighChol']), int(form_data['CholCheck'])
-                , int(processed_data['BMI']), int(form_data['Smoker']), int(form_data['Stroke']), int(form_data['HeartDiseaseorAttack'])
-                , int(form_data['PhysActivity']), int(form_data['Fruits']), int(form_data['Veggies']), int(form_data['HvyAlcoholConsump'])
-                , int(form_data['AnyHealthcare']), int(form_data['NoDocbcCost']), int(form_data['GenHlth']), int(form_data['MentHlth'])
-                , int(form_data['PhysHlth']), int(form_data['DiffWalk']), int(form_data['Sex']), int(form_data['Age']), int(form_data['Education']), ]])
+            result = model_complex_pretrained.predict([[
+                int(processed_data['HighBP'].iloc[0]),
+                int(processed_data['HighChol'].iloc[0]),
+                int(form_data['CholCheck']),
+                int(processed_data['BMI'].iloc[0]),
+                int(form_data['Smoker']),
+                int(form_data['Stroke']),
+                int(form_data['HeartDiseaseorAttack']),
+                int(form_data['PhysActivity']),
+                int(form_data['Fruits']),
+                int(form_data['Veggies']),
+                int(form_data['HvyAlcoholConsump']),
+                int(form_data['AnyHealthcare']),
+                int(form_data['NoDocbcCost']),
+                int(form_data['GenHlth']),
+                int(form_data['MentHlth']),
+                int(form_data['PhysHlth']),
+                int(form_data['DiffWalk']),
+                int(form_data['Sex']),
+                int(form_data['Age']),
+                int(form_data['Education'])
+            ]])
+            result_proba = model_complex_pretrained.predict_proba([[
+                int(processed_data['HighBP'].iloc[0]),
+                int(processed_data['HighChol'].iloc[0]),
+                int(form_data['CholCheck']),
+                int(processed_data['BMI'].iloc[0]),
+                int(form_data['Smoker']),
+                int(form_data['Stroke']),
+                int(form_data['HeartDiseaseorAttack']),
+                int(form_data['PhysActivity']),
+                int(form_data['Fruits']),
+                int(form_data['Veggies']),
+                int(form_data['HvyAlcoholConsump']),
+                int(form_data['AnyHealthcare']),
+                int(form_data['NoDocbcCost']),
+                int(form_data['GenHlth']),
+                int(form_data['MentHlth']),
+                int(form_data['PhysHlth']),
+                int(form_data['DiffWalk']),
+                int(form_data['Sex']),
+                int(form_data['Age']),
+                int(form_data['Education'])
+            ]])
         
         predicted_class = result[0]  # 預測的類別
         class_probabilities = result_proba[0]  # 每個類別的概率
