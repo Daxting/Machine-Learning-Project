@@ -12,7 +12,7 @@ This project developed a machine learning  model  to  predict  diabetes onset ba
 
 ![image](https://github.com/user-attachments/assets/666ed38d-89b4-44cb-b527-ffe27f5b21f3)
 
-Fig. 1 Datasets vidualization by seaborn package 
+Fig. 1 Datasets visualization by seaborn package
 
 
 ![image](https://github.com/user-attachments/assets/4245aebf-bffb-43e9-98e2-5f7ad7e6b1cd)
